@@ -1,0 +1,41 @@
+< <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+    <%= csrf_meta_tags %>
+    <%= javascript_include_tag "application" %>
+
+<h1 class="text-center"><%=@votacion["razon"]%></h1>
+
+
+<% @partidos.each do |partido| %>
+
+	<div class="col-lg-12 text-center">
+		<h3 >Partido <%=partido["nombre"]%></h3>
+	</div>
+	<div class="col-lg-12" style="background-color: <%=partido["color"]%>; padding: 10px;">
+		
+	<% if  @opcions.select {|opcion| opcion["partido_id"] == partido["id"] }.count != 1 %>
+		<% @opcions.select {|opcion| opcion["partido_id"] == partido["id"] }.each do |opcion| %>
+			<center>
+			<div class="col-lg-6">
+				<img src="/assets/missing.png" width="500px" height="500px" style="border: solid 5px <%=partido["color_secundario"]%>;background-color:white;"><br>
+				<h3 style="color: <%=partido["color_secundario"]%>"><%=opcion["nombre"]%></h3>
+			</div>
+			</center>
+		<% end %>
+	<% else %>
+		<% @opcions.select {|opcion| opcion["partido_id"] == partido["id"] }.each do |opcion| %>
+			<center>
+			<div class="col-lg-3"></div>
+			<div class="col-lg-6">
+				<img src="/assets/missing.png" width="500px" height="500px" style="border: solid 5px <%=partido["color_secundario"]%>;background-color:white;"><br>
+				<h3 style="color: <%=partido["color_secundario"]%>"><%=opcion["nombre"]%></h3>
+			</div>
+			</center>
+		<% end %>
+	<% end %>
+
+	</div>
+<% end %>
+<a href="/votar" class="btn btn-success">VOTAR!</a>
