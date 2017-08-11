@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
   		estado.save
   	end
 
-    url_terminal = "http://localhost:3000/votacion_show_json"
+    url_terminal = "http://104.131.40.8/votacion_show_json"
       url = URI.parse(url_terminal)
       req = Net::HTTP::Get.new(url.to_s)
       res = Net::HTTP.start(url.host, url.port) {|http|
@@ -17,7 +17,7 @@ class WelcomeController < ApplicationController
     @votacion = JSON.parse res.body
 
   	if Estado.get_estado() == "votando"
-      url_terminal = "http://localhost:3000/partidos_index_json"
+      url_terminal = "http://104.131.40.8/partidos_index_json"
       url = URI.parse(url_terminal)
       req = Net::HTTP::Get.new(url.to_s)
       res = Net::HTTP.start(url.host, url.port) {|http|
@@ -26,7 +26,7 @@ class WelcomeController < ApplicationController
       
       @partidos = JSON.parse res.body
 
-      url_terminal = "http://localhost:3000/opcions_index_json"
+      url_terminal = "http://104.131.40.8/opcions_index_json"
       url = URI.parse(url_terminal)
       req = Net::HTTP::Get.new(url.to_s)
       res = Net::HTTP.start(url.host, url.port) {|http|
@@ -46,7 +46,7 @@ class WelcomeController < ApplicationController
   end
 
   def votar
-    url = URI.parse('http://localhost:3000/finalizar_voto/' + Estado.first.id_en_linea.to_s + '/' + Estado.first.user_id.to_s)
+    url = URI.parse('http://104.131.40.8/finalizar_voto/' + Estado.first.id_en_linea.to_s + '/' + Estado.first.user_id.to_s)
     req = Net::HTTP::Get.new(url.to_s)
     res = Net::HTTP.start(url.host, url.port) {|http|
       http.request(req)
