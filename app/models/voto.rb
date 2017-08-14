@@ -14,6 +14,7 @@ class Voto < ApplicationRecord
 		new_obj = JSON.parse json_obj
 		if new_obj.nil?
 			return false
+		end
 		return new_obj.first["qty"].to_i >0
 	end
 
