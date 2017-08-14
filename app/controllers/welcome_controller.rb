@@ -35,13 +35,12 @@ class WelcomeController < ApplicationController
       (0..Votacion.first.balotas).each do |counter|
         param = "direccion_partido_" + counter.to_s 
         Voto.emitir_voto(params[param.to_sym])
+        url = URI.parse('http://104.131.40.8/finalizar_voto/' + Estado.first.id_en_linea.to_s + '/' + Estado.first.user_id.to_s)
+        req = Net::HTTP::Get.new(url.to_s)
+        res = Net::HTTP.start(url.host, url.port) {|http|
+          http.request(req)
+        }
       end
-    else
-      url = URI.parse('http://104.131.40.8/finalizar_voto/' + Estado.first.id_en_linea.to_s + '/' + Estado.first.user_id.to_s)
-      req = Net::HTTP::Get.new(url.to_s)
-      res = Net::HTTP.start(url.host, url.port) {|http|
-        http.request(req)
-      }
     end
     redirect_to :root
   end

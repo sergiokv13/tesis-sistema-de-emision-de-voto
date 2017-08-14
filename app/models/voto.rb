@@ -14,8 +14,9 @@ class Voto < ApplicationRecord
 		new_obj = JSON.parse json_obj
 		if new_obj.nil?
 			return false
+		else 
+			return new_obj.first["qty"].to_i >0
 		end
-		return new_obj.first["qty"].to_i >0
 	end
 
 	def self.emitir_voto(direccion_opcion)
