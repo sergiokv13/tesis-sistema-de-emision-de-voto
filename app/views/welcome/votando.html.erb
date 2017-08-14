@@ -75,11 +75,15 @@
 		}
 		console.log(array_post);
 		
-		$.post('/votar', array_post).done(function(data) {
-			//location.reload(true);
+		$.ajax({
+		   type: "POST",
+		   data: {array_post:array_post},
+		   url: "/votar",
+		   success: function(msg){
+		     //location.reload(true);
 			alert("LISTO")
+		   }
 		});
-
 	}
 
 </script>
