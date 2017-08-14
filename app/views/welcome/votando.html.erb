@@ -68,11 +68,13 @@
 
 	function send_vote(){
 		var array_post = []; 
+		var AUTH_TOKEN = $('meta[name=csrf-token]').attr('content');
 		for (c = 0 ; c < votados.length ; c++)
 		{
 			array_post["direccion_partido_" + c.toString()] = $("#votar_"+votados[c]).attr('name');
 		}
-		$.get('/votar', array_post).done(function(data) {
+		array_post["&authenticity_token"] = AUTH_TOKEN
+		$.post('/votar', array_post).done(function(data) {
 			location.reload(true);
 		});
 	}
