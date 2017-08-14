@@ -39,7 +39,10 @@
 <% end %>
 
 <script>
-	if <%=@blockchain_problem%> { alert("La blockchain esta actualizandose.")}
+	<% if @blockchain_problem %> 
+		alert("La blockchain esta actualizandose.");
+	<% end %>
+
 	var balotas = 3
 	var votos_realizados = 0;
 	var votados = [];
