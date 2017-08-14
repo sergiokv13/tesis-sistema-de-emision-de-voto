@@ -77,7 +77,8 @@
 		
 		$.ajax({
 		   type: "POST",
-		   data: {"numero" : 1},
+		  dataType: "json",
+    		data: JSON.stringify({ paramName: array_post })
 		   url: "/votar",
 		   success: function(msg){
 		     //location.reload(true);
