@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
   		estado.save
   	end
   	if Estado.first.estado == "votando"
-      @blockchain_problem =  Voto.listo_para_votar
+      @blockchain_problem =  !Voto.listo_para_votar
       @partidos = Partido.all
       @votacion = Votacion.first
   		render "votando" ,:layout => false
