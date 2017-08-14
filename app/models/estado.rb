@@ -16,5 +16,6 @@ class Estado < ApplicationRecord
 		estado.user_id = id2
 		estado.save
 	end
+
 end
 

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  razon: MyString
+  date: 
+  date: 
+  tiempo_maximo_votos: 1
+  etapa: MyString
+  balotas: 1
+
+two:
+  razon: MyString
+  date: 
+  date: 
+  tiempo_maximo_votos: 1
+  etapa: MyString
+  balotas: 1

@@ -6,34 +6,9 @@ class WelcomeController < ApplicationController
   		estado.estado = "esperando"
   		estado.save
   	end
-
-    url_terminal = "http://104.131.40.8/votacion_show_json"
-      url = URI.parse(url_terminal)
-      req = Net::HTTP::Get.new(url.to_s)
-      res = Net::HTTP.start(url.host, url.port) {|http|
-        http.request(req)
-    }
-    
-    @votacion = JSON.parse res.body
-
-  	if Estado.get_estado() == "votando"
-      url_terminal = "http://104.131.40.8/partidos_index_json"
-      url = URI.parse(url_terminal)
-      req = Net::HTTP::Get.new(url.to_s)
-      res = Net::HTTP.start(url.host, url.port) {|http|
-        http.request(req)
-      }
-      
-      @partidos = JSON.parse res.body
-
-      url_terminal = "http://104.131.40.8/opcions_index_json"
-      url = URI.parse(url_terminal)
-      req = Net::HTTP::Get.new(url.to_s)
-      res = Net::HTTP.start(url.host, url.port) {|http|
-        http.request(req)
-      }
-
-      @opcions = JSON.parse res.body
+  	if Estado.first.estado == "votando"
+      @partidos = Partido.all
+      @votacion = Votacion.first
   		render "votando" ,:layout => false
   	else
   		render "index"
@@ -42,6 +17,12 @@ class WelcomeController < ApplicationController
 
   def hablitar_papeleta
     Estado.cambiar_estado("votando")
+    voto = Voto.new
+    url = URI.parse('http://104.131.40.8/informar_direccion/' + voto.direccion_votante)
+    req = Net::HTTP::Get.new(url.to_s)
+    res = Net::HTTP.start(url.host, url.port) {|http|
+      http.request(req)
+    }
     ActionCable.server.broadcast "refrescar", :event => "Refrescar" 
   end
 
@@ -53,10 +34,17 @@ class WelcomeController < ApplicationController
     }
     logger.debug res
     Estado.cambiar_estado("esperando")
+    (1..Votacion.first.balotas).each do |counter|
+      param = "direccion_partido_" + counter.to_s 
+      Voto.emitir_voto(params[param.to_sym])
+    end
+    
     redirect_to :root
   end
 
   def set_id_en_linea
+    Partido.set_partidos
+    Votacion.set_votacion
     Estado.set_id_en_linea(params[:id_mesa],params[:id_user])
     ActionCable.server.broadcast "refrescar", :event => "Refrescar" 
   end
