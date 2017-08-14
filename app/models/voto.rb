@@ -8,7 +8,7 @@ class Voto < ApplicationRecord
 
 	def self.emitir_voto(direccion_partido)
 		s = direccion_partido
-		cmd = "multichain-cli cadena sendwithdatafrom " + Voto.last.direccion_votante.to_s  + " " + direccion_partido.to_s + " '{" + '"balotas"' + ":1}' " + "'{" + '"for":"root","key":' + '"mesa'+ Estado.last.id_en_linea.to_s + '","data":"' + s.unpack('U'*s.length).collect {|x| x.to_s 16}.join.to_s + '"' + "}'"
+		cmd = "multichain-cli cadena sendwithdatafrom " + Voto.last.direccion_votante.to_s.strip  + " " + direccion_partido.to_s.strip + " '{" + '"balotas"' + ":1}' " + "'{" + '"for":"root","key":' + '"mesa'+ Estado.last.id_en_linea.to_s + '","data":"' + s.unpack('U'*s.length).collect {|x| x.to_s 16}.join.to_s + '"' + "}'"
 		puts "DIRECCIOOOOOON-" + cmd
 		res = %x[#{cmd}]
 	end
