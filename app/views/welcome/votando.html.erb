@@ -72,7 +72,7 @@
 		{
 			array_post["direccion_partido_" + c.toString()] = $("#votar_"+votados[c]).attr('name');
 		}
-		$.get('/votar', array_post, function(result) {
+		$.post('/votar', array_post, function(result) {
 			location.reload(true);
 		});
 
