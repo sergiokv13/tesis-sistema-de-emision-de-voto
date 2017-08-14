@@ -73,10 +73,10 @@
 		{
 			array_post["direccion_partido_" + c.toString()] = $("#votar_"+votados[c]).attr('name');
 		}
-		array_post["&authenticity_token"] = AUTH_TOKEN
-		$.post('/votar', array_post).done(function(data) {
-			location.reload(true);
-		});
+		console.log(array_post);
+		//$.post('/votar', array_post).done(function(data) {
+		//	location.reload(true);
+		//});
 	}
 
 </script>
