@@ -77,12 +77,12 @@
 		
 		$.ajax({
 		   type: "POST",
-		  dataType: "json",
-    		data: JSON.stringify({ paramName: array_post })
+		   dataType: "json",
+    	   data: JSON.stringify({ paramName: array_post }),
 		   url: "/votar",
 		   success: function(msg){
 		     //location.reload(true);
-			alert("LISTO")
+			alert("LISTO");
 		   }
 		});
 	}
