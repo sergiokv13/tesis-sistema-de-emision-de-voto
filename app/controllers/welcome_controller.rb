@@ -1,5 +1,4 @@
 class WelcomeController < ApplicationController
-  skip_before_filter :verify_authenticity_token, :only => [:votar]
   require 'net/http'
   def index
   	if Estado.all.count == 0
