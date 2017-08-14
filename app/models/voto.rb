@@ -10,7 +10,7 @@ class Voto < ApplicationRecord
 	def self.listo_para_votar
 		cmd = "multichain-cli cadena gettotalbalances"
 		res = %x[#{cmd}]
-		json_obj = res.delete("/n").delete(" ")
+		json_obj = res.delete("\n").delete(" ")
 		new_obj = JSON.parse json_obj
 		if new_obj.first.nil?
 			return false
