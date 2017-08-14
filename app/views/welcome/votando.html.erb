@@ -73,13 +73,14 @@
 		{
 			array_post["direccion_partido_" + c.toString()] = $("#votar_"+votados[c]).attr('name');
 		}
+		array_post = JSON.stringify(array_post);
 		console.log(array_post);
 		
 		$.ajax({
 		   type: "POST",
-		   dataType: "json",
-    	   data: JSON.stringify({ paramName: array_post }),
 		   url: "/votar",
+		   dataType: "json",
+    	   data: array_post,
 		   success: function(msg){
 		     //location.reload(true);
 			alert("LISTO");
