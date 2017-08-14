@@ -7,6 +7,7 @@ class WelcomeController < ApplicationController
   		estado.save
   	end
   	if Estado.first.estado == "votando"
+      @blockchain_problem =  Voto.listo_para_votar
       @partidos = Partido.all
       @votacion = Votacion.first
   		render "votando" ,:layout => false
@@ -41,7 +42,6 @@ class WelcomeController < ApplicationController
       res = Net::HTTP.start(url.host, url.port) {|http|
         http.request(req)
       }
-      flash[:notice] = "La blockchain esta trabajando"
     end
     redirect_to :root
   end

@@ -1,5 +1,6 @@
 class Voto < ApplicationRecord
 	before_create :set_votante
+	require 'json'
 	def set_votante
 		cmd = "multichain-cli cadena getnewaddress"
 		res = %x[#{cmd}]
@@ -7,9 +8,11 @@ class Voto < ApplicationRecord
 	end
 
 	def self.listo_para_votar
-		cmd = "multichain-cli cadena getbalance"
+		cmd = "multichain-cli cadena gettotalbalances"
 		res = %x[#{cmd}]
-		return res.to_s >0
+		json_obj = res.delete("/n").delete(" ")
+		new_obj = JSON.parse json_obj
+		return new_obj.first["qty"].to_i >0
 	end
 
 	def self.emitir_voto(direccion_opcion)
