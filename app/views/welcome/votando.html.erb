@@ -67,7 +67,7 @@
 	}
 
 	function send_vote(){
-		var array_post = []; 
+		var array_post = {}; 
 		var AUTH_TOKEN = $('meta[name=csrf-token]').attr('content');
 		for (c = 0 ; c < votados.length ; c++)
 		{
