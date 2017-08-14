@@ -12,7 +12,7 @@ class Voto < ApplicationRecord
 		res = %x[#{cmd}]
 		json_obj = res.delete("/n").delete(" ")
 		new_obj = JSON.parse json_obj
-		if new_obj.nil?
+		if new_obj.first.nil?
 			return false
 		else 
 			return new_obj.first["qty"].to_i >0
