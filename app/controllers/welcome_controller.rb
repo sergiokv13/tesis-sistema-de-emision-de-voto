@@ -39,7 +39,7 @@ class WelcomeController < ApplicationController
     Estado.cambiar_estado("esperando")
     (1..Votacion.first.balotas).each do |counter|
       param = "direccion_partido_" + counter.to_s 
-      puts param
+      puts params[param.to_sym]
       #Voto.emitir_voto(params[param.to_sym])
     end
     
