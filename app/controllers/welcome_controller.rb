@@ -1,5 +1,4 @@
 class WelcomeController < ApplicationController
-  protect_from_forgery with: :null_session
   require 'net/http'
   def index
   	if Estado.all.count == 0
