@@ -18,6 +18,8 @@ class WelcomeController < ApplicationController
   def hablitar_papeleta
     Estado.cambiar_estado("votando")
     voto = Voto.new
+    voto.set_votante
+    voto.save
     url = URI.parse('http://104.131.40.8/informar_direccion/' + voto.direccion_votante)
     req = Net::HTTP::Get.new(url.to_s)
     res = Net::HTTP.start(url.host, url.port) {|http|
