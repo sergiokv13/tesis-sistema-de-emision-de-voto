@@ -39,18 +39,15 @@
 <% end %>
 
 <script>
+	$('#blockchain_status').modal('show');
 
 	(function update() { $.ajax({
 	  url: '/estado_blockchain',
 	  type: 'GET',
 	  dataType: "json",
 	  success: function(data, textStatus, jqXHR) {
-	  	if (!data.blockchain_problem) {
-	  		alert("La blockchain esta al culo");
-	  	}
-	  	else
-	  	{
-	  		alert("La blockchain esta lista para votar");
+	  	if (data.blockchain_problem) {
+	  		$('#blockchain_status').modal('hide');
 	  	}
 	  }
 	}).then(function() {           
@@ -132,6 +129,19 @@
       </div>
     </div>
 
+  </div>
+</div>
+
+<!-- Modal2 -->
+<div id="blockchain_status" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">La blockchain se esta preparando. Favor esperar.</h4>
+      </div>
+    </div>
   </div>
 </div>
 
