@@ -55,7 +55,8 @@
 	  }
 	}).then(function() {           
        setTimeout(update, 1000); 
-    }))();  
+    });
+	})();   
 
 	var balotas = <%=@votacion.balotas%>;
 	var votos_realizados = 0;
