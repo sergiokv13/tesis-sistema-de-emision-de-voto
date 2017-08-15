@@ -86,9 +86,12 @@
 		   dataType: "json",
     	   data: array_post,
 		   success: function(msg){
+		   	location.reload();
+		   }
+		   error: function(msg){
+		   	location.reload();
 		   }
 		});
-		location.reload();
 	}
 
 </script>
