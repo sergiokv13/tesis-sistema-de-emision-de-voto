@@ -32,7 +32,7 @@ class WelcomeController < ApplicationController
   def votar
     if Voto.listo_para_votar
       Estado.cambiar_estado("esperando")
-      (0..Votacion.first.balotas).each do |counter|
+      (0..Votacion.first.balotas-1).each do |counter|
         param = "direccion_partido_" + counter.to_s 
         Voto.emitir_voto(params[param.to_sym])
         url = URI.parse('http://104.131.40.8/finalizar_voto/' + Estado.first.id_en_linea.to_s + '/' + Estado.first.user_id.to_s)
