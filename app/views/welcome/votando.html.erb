@@ -41,19 +41,7 @@
 <script>
 	$('#blockchain_status').modal('show');
 
-	(function update() { $.ajax({
-	  url: '/estado_blockchain',
-	  type: 'GET',
-	  dataType: "json",
-	  success: function(data, textStatus, jqXHR) {
-	  	if (data.blockchain_problem) {
-	  		$('#blockchain_status').modal('hide');
-	  	}
-	  }
-	}).then(function() {           
-       setTimeout(update, 1000); 
-    });
-	})();   
+	
 
 	var balotas = <%=@votacion.balotas%>;
 	var votos_realizados = 0;
