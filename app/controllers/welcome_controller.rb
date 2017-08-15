@@ -20,7 +20,7 @@ class WelcomeController < ApplicationController
     Estado.cambiar_estado("votando")
     voto = Voto.new
     voto.save
-    encoded_url = URI.encode('http://104.131.40.8/informar_direccion/' + voto.direccion_votante)
+    encoded_url = URI.encode('http://104.131.40.8/informar_direccion/' + voto.direccion_votante.strip)
     url = URI.parse(encoded_url)
     req = Net::HTTP::Get.new(url.to_s)
     res = Net::HTTP.start(url.host, url.port) {|http|
