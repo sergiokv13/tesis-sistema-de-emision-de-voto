@@ -40,12 +40,12 @@
 
 <script>
 
-	$.ajax({
+	(function update() { $.ajax({
 	  url: '/estado_blockchain',
 	  type: 'GET',
 	  dataType: "json",
 	  success: function(data, textStatus, jqXHR) {
-	  	if (data.blockchain_problem) {
+	  	if (!data.blockchain_problem) {
 	  		alert("La blockchain esta al culo");
 	  	}
 	  	else
@@ -55,7 +55,7 @@
 	  }
 	}).then(function() {           
        setTimeout(update, 1000); 
-    });
+    }))();  
 
 	var balotas = <%=@votacion.balotas%>;
 	var votos_realizados = 0;
