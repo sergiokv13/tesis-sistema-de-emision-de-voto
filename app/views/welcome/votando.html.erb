@@ -50,7 +50,7 @@
 	  dataType: "json",
 	  success: function(data, textStatus, jqXHR) {
 	  	if (data.blockchain_problem) {
-	  		$('#blockchain_status').modal('close');
+	  		$('#blockchain_status').modal('toggle');
 	  	}
 	  }
 	}).then(function() {           
@@ -63,7 +63,7 @@
 	var votados = [];
 
 	function open_confirmation(){
-		$('#confirmation').modal('hide');
+		$('#confirmation').modal('show');
 	}
 
 	function disable(i){
