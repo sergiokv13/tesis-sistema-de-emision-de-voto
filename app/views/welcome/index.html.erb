@@ -8,6 +8,7 @@
   		<div class="col-lg-2"></div>
 	  	<div class="col-lg-8 text-center jumbotron">
 	    	<h1>Bienvenido al sistema de emision de voto en mesa <%= if Estado.first.id_en_linea.nil? then "no registrada" else Estado.first.id_en_linea end%></h1>
+	    	<%=if Estado.first.id_en_linea.nil? then request.remote_ip end%>
 	    </div>
    </div>
   </div>
