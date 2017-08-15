@@ -44,7 +44,19 @@
         $('#blockchain_status').modal('show');
     });
 
-	
+	(function update() { $.ajax({
+	  url: '/estado_blockchain',
+	  type: 'GET',
+	  dataType: "json",
+	  success: function(data, textStatus, jqXHR) {
+	  	if (data.blockchain_problem) {
+	  		$('#blockchain_status').modal('close');
+	  	}
+	  }
+	}).then(function() {           
+       setTimeout(update, 1000); 
+    });
+	})();   
 
 	var balotas = <%=@votacion.balotas%>;
 	var votos_realizados = 0;
@@ -124,7 +136,7 @@
 </div>
 
 <!-- Modal2 -->
-<div id="blockchain_status" class="modal fade" role="dialog">
+<div id="blockchain_status" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
