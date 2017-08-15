@@ -50,7 +50,7 @@
 	  dataType: "json",
 	  success: function(data, textStatus, jqXHR) {
 	  	if (data.blockchain_problem) {
-	  		$('#blockchain_status').modal('toggle');
+	  		$('#blockchain_status').modal('hide');
 	  	}
 	  }
 	}).then(function() {           
