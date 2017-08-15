@@ -39,7 +39,10 @@
 <% end %>
 
 <script>
-	(function(){ $('#blockchain_status').modal('show');})();
+	
+	$(window).on('load',function(){
+        $('#blockchain_status').modal('show');
+    });
 
 	
 
