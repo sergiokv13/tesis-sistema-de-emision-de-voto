@@ -7,7 +7,6 @@ class WelcomeController < ApplicationController
   		estado.save
   	end
   	if Estado.first.estado == "votando"
-      @blockchain_problem =  !Voto.listo_para_votar
       @partidos = Partido.all
       @votacion = Votacion.first
   		render "votando" ,:layout => false
@@ -27,6 +26,12 @@ class WelcomeController < ApplicationController
       http.request(req)
     }
     ActionCable.server.broadcast "refrescar", :event => "Refrescar" 
+  end
+
+  def estado_blockchain
+    respond_to do |format|
+      format.json { render json: {blockchain_problem: Voto.listo_para_votar} }
+    end
   end
 
   def votar

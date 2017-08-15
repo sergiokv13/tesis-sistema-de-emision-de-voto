@@ -39,9 +39,23 @@
 <% end %>
 
 <script>
-	<% if @blockchain_problem %> 
-		alert("La blockchain esta actualizandose.");
-	<% end %>
+
+	$.ajax(url, {
+	  url: '/estado_blockchain',
+	  type: 'POST',
+	  dataType: "json",
+	  success: function(data, textStatus, jqXHR) {
+	  	if (data.blockchain_problem) {
+	  		alert("La blockchain esta al culo");
+	  	}
+	  	else
+	  	{
+	  		alert("La blockchain esta lista para votar");
+	  	}
+	  }
+	}).then(function() {           
+       setTimeout(update, 1000); 
+    });
 
 	var balotas = <%=@votacion.balotas%>;
 	var votos_realizados = 0;
