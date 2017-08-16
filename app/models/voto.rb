@@ -21,7 +21,7 @@ class Voto < ApplicationRecord
 
 	def self.emitir_voto(direccion_opcion)
 		s = Estado.last.id_en_linea.to_s
-		cmd = "multichain-cli cadena sendwithdatafrom " + Voto.last.direccion_votante.to_s.strip  + " " + direccion_opcion.to_s.strip + " '{" + '"balotas"' + ":1}' " + "'{" + '"for":"root","key":' + '"'+ direccion_opcion + '","data":"' + s.unpack('U'*s.length).collect {|x| x.to_s 16}.join.to_s + '"' + "}'"
+		cmd = "multichain-cli cadena sendwithdatafrom " + Voto.last.direccion_votante.to_s.strip  + " " + direccion_opcion.to_s.strip + " '{" + '"balotas"' + ":1}' " + "'{" + '"for":"root","key":' + '"'+ direccion_opcion.to_s.strip + '","data":"' + s.unpack('U'*s.length).collect {|x| x.to_s 16}.join.to_s + '"' + "}'"
 		res = %x[#{cmd}]
 	end
 end

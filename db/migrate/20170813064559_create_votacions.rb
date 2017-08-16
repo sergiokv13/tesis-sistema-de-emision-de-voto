@@ -4,7 +4,6 @@ class CreateVotacions < ActiveRecord::Migration[5.1]
       t.text "razon"
       t.datetime "inicio"
       t.datetime "finalizacion"
-      t.integer "tiempo_maximo_votos"
       t.string "etapa"
       t.integer "balotas"
 

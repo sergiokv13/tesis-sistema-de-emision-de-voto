@@ -15,7 +15,6 @@ require 'net/http'
 	      v.razon = @votacion["razon"]
 	      v.inicio= @votacion["inicio"]
 	      v.finalizacion = @votacion["finalizacion"]
-	      v.tiempo_maximo_votos = @votacion["tiempo_maximo_votos"]
 	      v.etapa = @votacion["etapa"]
 	      v.balotas = @votacion["balotas"]
 	      v.save
